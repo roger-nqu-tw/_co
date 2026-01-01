@@ -9,3 +9,35 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+(LOOP)
+    @KBD
+    D=M
+    @BLACKEN
+    D;JNE 
+    @color
+    M=0    
+    @RENDER
+    0;JMP
+(BLACKEN)
+    @color
+    M=-1    
+(RENDER)
+    @SCREEN
+    D=A
+    @address
+    M=D    
+(SCREEN_LOOP)
+    @color
+    D=M   
+    @address
+    A=M      
+    M=D      
+    @address
+    M=M+1   
+    D=M
+    @KBD
+    D=D-A  
+    @SCREEN_LOOP
+    D;JLT    
+    @LOOP
+    0;JMP  
