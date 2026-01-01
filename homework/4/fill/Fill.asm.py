@@ -8,36 +8,35 @@
 // i.e. writes "black" in every pixel. When no key is pressed, 
 // the screen should be cleared.
 
-//// Replace this comment with your code.
-(LOOP)
-    @KBD
-    D=M
-    @BLACKEN
-    D;JNE 
-    @color
-    M=0    
-    @RENDER
-    0;JMP
-(BLACKEN)
-    @color
-    M=-1    
-(RENDER)
+(RESTART)
     @SCREEN
     D=A
     @address
-    M=D    
-(SCREEN_LOOP)
+    M=D        
+(KBD_CHECK)
+    @KBD
+    D=M
+    @BLACK
+    D;JNE  
     @color
-    D=M   
+    M=0      
+    @DRAW
+    0;JMP
+(BLACK)
+    @color
+    M=-1     
+(DRAW)
+    @color
+    D=M
     @address
-    A=M      
-    M=D      
+    A=M       
+    M=D       
     @address
-    M=M+1   
+    M=M+1     
     D=M
     @KBD
-    D=D-A  
-    @SCREEN_LOOP
-    D;JLT    
-    @LOOP
-    0;JMP  
+    D=A-D      
+    @DRAW
+    D;JGT      
+    @RESTART
+    0;JMP     
