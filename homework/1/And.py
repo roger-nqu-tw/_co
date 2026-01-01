@@ -11,5 +11,6 @@ CHIP And {
     OUT out;
     
     PARTS:
-    //// Replace this comment with your code.
+   Not(in=nandOut, out=out);
+
 }
